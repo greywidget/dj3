@@ -71,6 +71,10 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "mysite.wsgi.application"
 
+# I added this to suppress a warning.
+# See https://stackoverflow.com/questions/66971594/auto-create-primary-key-used-when-not-defining-a-primary-key-type-warning-in-dja
+DEFAULT_AUTO_FIELD = "django.db.models.AutoField"
+
 
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
