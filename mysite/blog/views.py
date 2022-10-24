@@ -3,14 +3,21 @@ from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.http import HttpRequest
 from django.shortcuts import get_object_or_404, render
 from django.views.generic import ListView
+from taggit.models import Tag
 
 from .forms import CommentForm, EmailPostForm
 from .models import Comment, Post
 
 
 # Create your views here
-def post_list(request):
+def post_list(request, tag_slug=None):
     object_list = Post.published.all()
+    tag = None
+
+    if tag_slug:
+        tag = get_object_or_404(Tag, slug=tag_slug)
+        object_list = object_list.filter(tags__in=[tag])
+
     paginator = Paginator(object_list, 3)
     page = request.GET.get("page")
     try:
@@ -21,7 +28,9 @@ def post_list(request):
     except EmptyPage:
         # If page is out of range, deliver last page of results
         posts = paginator.page(paginator.num_pages)
-    return render(request, "blog/post/list.html", {"page": page, "posts": posts})
+    return render(
+        request, "blog/post/list.html", {"page": page, "posts": posts, "tag": tag}
+    )
 
 
 def post_detail(request, year, month, day, post):
