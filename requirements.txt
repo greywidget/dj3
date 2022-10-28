@@ -17,6 +17,8 @@ django-taggit==1.2.0
     # via -r requirements.in
 markdown==3.2.1
     # via -r requirements.in
+psycopg2-binary==2.9.5
+    # via -r requirements.in
 python-decouple==3.6
     # via -r requirements.in
 pytz==2022.2.1
