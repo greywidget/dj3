@@ -6,13 +6,18 @@
 #
 asgiref==3.5.2
     # via django
+dj-database-url==1.0.0
+    # via -r requirements.in
 django==3.2.15
     # via
     #   -r requirements.in
+    #   dj-database-url
     #   django-taggit
 django-taggit==1.2.0
     # via -r requirements.in
 markdown==3.2.1
+    # via -r requirements.in
+python-decouple==3.6
     # via -r requirements.in
 pytz==2022.2.1
     # via django
